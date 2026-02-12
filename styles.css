@@ -1,0 +1,230 @@
+:root{
+  /* Color system */
+  --bg: #fff7fa;
+  --card: #ffffff;
+  --accent: #ff7fbf;
+  --accent-2: #ff9ac0;
+  --muted: #f8e7ef;
+  --text: #4a2b3a;
+  --soft: #f6d7e6;
+
+  /* Elevation */
+  --shadow-sm: 0 6px 20px rgba(78,24,48,0.06);
+  --shadow-lg: 0 18px 50px rgba(80,20,40,0.08);
+
+  /* Motion */
+  --ease-soft: cubic-bezier(.22,.9,.29,1);
+  --micro: 220ms;
+  --mid: 480ms;
+  --long: 650ms;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(180deg, var(--bg) 0%, #fffefe 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.stage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+
+/* Primary centered stage that does not move during content swaps */
+.primary-stage{display:flex;align-items:center;justify-content:center;width:100%;max-width:820px;min-height:460px;padding:28px}
+.stage-content{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;min-height:420px}
+.landing, .response-content{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;max-width:920px;width:100%}
+
+.gif-placeholder{width:140px;height:140px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--muted),#fff);box-shadow:var(--shadow-sm);will-change:transform,opacity}
+.gif-placeholder.large{width:240px;height:240px}
+.heart-svg{width:74%;height:74%;filter:drop-shadow(0 10px 30px rgba(255,127,191,0.14))}
+
+.question{font-family: 'Playfair Display', serif;font-size:40px;line-height:1.02;margin:6px 0;color:var(--text);font-weight:600;letter-spacing:0.2px}
+.question.small{font-size:28px}
+
+.buttons{display:flex;gap:16px;position:relative;margin-top:6px}
+.btn{--s:1;--tx:0px;--ty:0px;display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;border:none;font-weight:600;cursor:pointer;box-shadow:var(--shadow-sm);background:var(--card);transition:transform var(--micro) var(--ease-soft), box-shadow var(--micro) var(--ease-soft), opacity var(--micro);transform:translate(var(--tx), var(--ty)) scale(var(--s));will-change:transform,opacity}
+.btn.evade-enabled{transition:transform var(--mid) var(--ease-soft), opacity var(--micro)}
+.btn:focus{outline:2px solid rgba(255,127,191,0.25);outline-offset:4px}
+.btn:hover{transform:translate(var(--tx), var(--ty)) scale(calc(var(--s) + 0.03));box-shadow:var(--shadow-lg)}
+.btn:active{transform:translate(var(--tx), var(--ty)) scale(calc(var(--s) - 0.04))}
+
+.btn-yes{background:linear-gradient(180deg,#ffdff0,#ffd1e6);color:#5b2430}
+.btn-no{background:linear-gradient(180deg,#ffe7ec,#ffd0d8);color:#60202a;opacity:1}
+
+/* Hidden state used when we need instant removal */
+.hidden{display:none}
+
+/* Smooth entrance/exit helpers */
+.fade-up-enter{opacity:0;transform:translateY(10px)}
+.fade-up-enter.fade-up-enter-to{opacity:1;transform:translateY(0);transition:opacity var(--mid) var(--ease-soft), transform var(--mid) var(--ease-soft)}
+.fade-down-exit{opacity:1;transform:translateY(0)}
+.fade-down-exit.fade-down-exit-to{opacity:0;transform:translateY(-8px);transition:opacity var(--mid) var(--ease-soft), transform var(--mid) var(--ease-soft)}
+
+/* Response screen */
+.response{position:relative;opacity:0;pointer-events:none;transform:translateY(8px)}
+.response.is-visible{opacity:1;transform:translateY(0);pointer-events:auto;transition:opacity var(--mid) var(--ease-soft), transform var(--mid) var(--ease-soft)}
+.response-content{min-height:60vh;align-items:center;justify-content:center;padding:30px}
+.response-text{width:45%;min-width:260px;background:var(--card);padding:28px;border-radius:16px;box-shadow:var(--shadow-lg);font-size:18px;line-height:1.5;color:#3f2731}
+
+/* Nav */
+.nav{position:fixed;top:10px;left:0;right:0;height:64px;background:rgba(255,255,255,0.5);display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transform:translateY(-100%);transition:transform var(--long) var(--ease-soft), background .25s}
+.nav--visible{transform:translateY(0);pointer-events:auto;backdrop-filter: blur(6px);box-shadow:0 6px 26px rgba(40,18,30,0.06)}
+.nav-inner{width:100%;max-width:960px;padding:12px;display:flex;justify-content:flex-end}
+.nav-item{background:rgba(255,255,255,0.86);border-radius:999px;padding:10px 16px;border:none;cursor:pointer;box-shadow:var(--shadow-sm);font-weight:600}
+
+/* Gift area */
+.gift-area{display:flex;align-items:center;justify-content:center;margin-top:20px}
+.gift-box{width:180px;height:150px;background:linear-gradient(180deg,var(--accent-2),var(--accent));border-radius:12px;position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 22px 48px rgba(255,110,150,0.12);transform-origin:center;transition:transform var(--mid) var(--ease-soft), box-shadow var(--mid)}
+.gift-box:hover{transform:translateY(-6px) scale(1.02)}
+.gift-lid{position:absolute;top:-22px;left:6px;right:6px;height:46px;background:linear-gradient(180deg,var(--accent),#ff5f9f);border-radius:10px 10px 6px 6px;transition:transform var(--long) var(--ease-soft), opacity var(--long)}
+.gift-ribbon{position:absolute;left:50%;top:36px;width:18px;height:82px;background:#fff;border-radius:8px;transform:translateX(-50%)}
+.gift-unwrapped .gift-lid{transform:translateY(-140%) rotate(-12deg);opacity:0}
+.gift-unwrapped .gift-box{transform:translateY(10px)}
+
+/* Book */
+.book{width:min(720px,70vw);aspect-ratio:3/4;background:linear-gradient(180deg,#fff,#fff);border-radius:12px;box-shadow:0 28px 56px rgba(80,20,40,0.10);position:relative;overflow:visible;display:flex;align-items:center;justify-content:center;transform-origin:center;opacity:0;transform:translateY(4px) scale(0.995);transition:opacity var(--mid) var(--ease-soft), transform var(--mid) var(--ease-soft);max-height:calc(100vh - 120px)}
+.book.book-enter{opacity:1;transform:translateY(0) scale(1)}
+.book-inner{position:relative;width:94%;height:88%;display:block}
+
+/* Hit areas to capture left/right clicks for page turns */
+.book .hit-area{position:absolute;top:0;bottom:0;width:50%;cursor:pointer;z-index:120}
+.book .hit-left{left:0}
+.book .hit-right{right:0}
+.book .hit-area:active{cursor:pointer}
+
+/* Spine and covers */
+.book-spine{position:absolute;left:50%;top:6%;bottom:6%;width:36px;transform:translateX(-50%);background:linear-gradient(180deg,#e6bfcf,#d894b0);border-radius:8px;box-shadow:inset 0 2px 12px rgba(0,0,0,0.08)}
+.book-cover{position:absolute;top:6%;bottom:6%;width:46%;background:linear-gradient(180deg,#ffdfe8,#ffc9dd);box-shadow:0 26px 56px rgba(90,20,40,0.12);border-radius:10px;transform-origin:left center;right:50%;pointer-events:auto;display:block;z-index:60;overflow:hidden;backface-visibility:hidden}
+.book-cover.back{left:50%;transform-origin:right center;right:auto;background:linear-gradient(180deg,#fff7fa,#fff0f4);z-index:50}
+
+/* Page stack between covers */
+.page-stack{position:absolute;left:8%;right:8%;top:10%;bottom:10%;pointer-events:auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;z-index:55}
+.page-stack .pane{position:relative;display:flex;align-items:center;justify-content:center;padding:6px}
+.page-stack .pane.left{justify-content:flex-end;padding-right:32px}
+.page-stack .pane.right{justify-content:flex-start;padding-left:32px}
+
+/* Left pane pages should overlap one another and not participate in normal flow
+  Position them absolute inside the left pane so they stack on top of the left pane
+  and do not push or compress the right pane content. */
+.page-stack .pane.left{position:relative}
+.page-stack .pane.left .page{position:absolute;right:32px;top:6px;width:calc(100% - 32px);height:calc(100% - 12px);display:block}
+.page-stack .pane.left .left-placeholder{right:32px;top:6px}
+
+/* ensure left static pages sit above covers and stack in source order */
+.page.static-left{/* z-index handled in placement rule below */}
+.page-stack:before{
+  /* layered page-edge illusion */
+  content:'';position:absolute;right:-8px;top:6px;bottom:6px;width:18px;background:linear-gradient(180deg,#faf6f3,#f7f3ef);border-radius:2px;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.03), 0 6px 18px rgba(40,18,30,0.06)
+}
+.left-stack{position:absolute;left:8%;top:10%;bottom:10%;width:44%;pointer-events:none;z-index:220}
+.left-stack .page{position:absolute;right:32px;top:6px;width:calc(100% - 32px);height:calc(100% - 12px);display:block}
+.left-stack .left-placeholder{right:32px;top:6px}
+.page{position:relative;width:92%;height:94%;padding:28px;background:linear-gradient(180deg,#fffaf6,#fff6f1);border-radius:8px;box-shadow:0 12px 30px rgba(30,12,20,0.07), inset 0 0 0 1px rgba(0,0,0,0.03);transition:transform 420ms cubic-bezier(.23,.9,.28,1), box-shadow 420ms, opacity 300ms;will-change:transform,opacity;backface-visibility:hidden;transform-style:preserve-3d;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.page.off{display:none;opacity:0;pointer-events:none}
+
+/* Static left/right placement after slide */
+.page.static-left{transform:translateX(0) scale(1);box-shadow:0 10px 22px rgba(20,8,16,0.06);z-index:50}
+.page.static-right{transform:translateX(0) scale(1);z-index:60}
+
+/* slide animation classes */
+.page.slide-forward{transform:translateX(-100%) scale(1);opacity:1;transition:transform 420ms cubic-bezier(.23,.9,.28,1), opacity 420ms}
+.page.slide-back{transform:translateX(100%) scale(1);opacity:1;transition:transform 420ms cubic-bezier(.23,.9,.28,1), opacity 420ms}
+.page.sliding{will-change:transform,opacity}
+
+/* page content layout */
+.page .page-content{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:left}
+.page .page-content img{max-width:100%;height:auto;border-radius:6px}
+/* back content initially hidden */
+.page .page-back{display:none;width:100%;height:100%;padding:24px;box-sizing:border-box}
+.page.static-left .page-back{display:block}
+.page.static-left .page-content{display:none}
+
+/* page content box for readable typography */
+.page .page-content{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:left}
+.page .page-content h2{font-family:'Playfair Display', serif;margin:0 0 10px 0;font-size:28px}
+.page .page-content p{font-size:18px;line-height:1.6;color:#4a2b3a;max-width:48ch}
+
+/* subtle curvature when book is opened */
+.book.open .page{transition:transform 420ms cubic-bezier(.23,.95,.22,1), box-shadow 420ms}
+.book.open .page{box-shadow:0 16px 40px rgba(20,8,16,0.08), inset 0 0 30px rgba(0,0,0,0.02)}
+
+/* Cover open state */
+.book .cover-front-open{transform:perspective(1400px) rotateY(-150deg) translateZ(-8px);transition:transform 520ms cubic-bezier(.18,.9,.22,1), box-shadow 520ms}
+.book .cover-front-closed{transform:perspective(1400px) rotateY(0deg)}
+
+/* Page turning */
+.page.turning{z-index:120;transition:transform 420ms cubic-bezier(.18,.9,.22,1), box-shadow 420ms, opacity 420ms}
+.page.turning.forward{transform-origin:left center;transform:rotateY(-170deg) translateZ(2px);box-shadow:0 26px 54px rgba(30,12,20,0.14)}
+.page.turning.backward{transform-origin:right center;transform:rotateY(170deg) translateZ(2px);box-shadow:0 26px 54px rgba(30,12,20,0.14)}
+
+/* left/right page visuals (half spreads) */
+.page.edge-shimmer:after{content:'';position:absolute;right:-8px;top:12%;bottom:12%;width:8px;background:linear-gradient(180deg, rgba(255,255,255,0.25), rgba(0,0,0,0.02));border-radius:2px;pointer-events:none;opacity:0.9}
+
+/* Page curl pseudo-element to simulate curvature during flip */
+.page:before{content:'';position:absolute;left:0;top:0;bottom:0;width:100%;pointer-events:none;transition:transform 420ms var(--ease-soft), opacity 420ms}
+.page.curl:before{background:linear-gradient(90deg, rgba(0,0,0,0.02), rgba(255,255,255,0.02));transform:skewY(-3deg) translateZ(1px);opacity:0.6}
+
+/* Mid-flip shadow state */
+.page.flipping{box-shadow:0 30px 80px rgba(20,8,16,0.16);z-index:200}
+
+/* Keep book centered and reserve space during animations */
+.primary-stage, .stage-content{display:flex;align-items:center;justify-content:center}
+.stage-content.book-present{min-height:75vh}
+/* page edge shimmer */
+.page.edge-shimmer:after{content:'';position:absolute;right:-6px;top:10%;bottom:10%;width:6px;background:linear-gradient(180deg, rgba(255,255,255,0.25), rgba(0,0,0,0.02));border-radius:2px;pointer-events:none;opacity:0.9}
+
+.book-controls{display:flex;gap:12px;padding:12px;justify-content:center}
+
+.book-controls button{background:transparent;border:1px solid rgba(60,20,30,0.06);padding:8px 12px;border-radius:8px;cursor:pointer;transition:transform var(--micro) var(--ease-soft)}
+.book-controls button:hover{transform:translateY(-3px)}
+
+/* Button microinteractions - subtle spring on press */
+.btn{transition:transform var(--micro) var(--ease-soft), box-shadow var(--micro) var(--ease-soft), opacity var(--micro)}
+.btn:active{transition:transform 180ms cubic-bezier(.2,.8,.3,1)}
+.btn:focus{box-shadow:0 8px 28px rgba(80,20,40,0.08)}
+
+/* Page flip improvements */
+.page{backface-visibility:hidden;transform-style:preserve-3d}
+.page.turning{transform:rotateY(-160deg);z-index:60;transition:transform var(--mid) cubic-bezier(.2,.9,.28,1), opacity var(--mid)}
+
+/* Heart gift styling and open animation refinements */
+.heart-box{width:220px;height:200px;display:flex;align-items:center;justify-content:center}
+.heart-shape{position:relative;width:120px;height:110px;background:transparent;transition:transform var(--mid) var(--ease-soft), opacity var(--mid)}
+.heart-shape:before,.heart-shape:after{content:'';position:absolute;width:60px;height:60px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:50%;box-shadow:0 10px 30px rgba(255,100,150,0.12)}
+.heart-shape:before{left:20%;top:6%}
+.heart-shape:after{right:20%;top:6%}
+.heart-shape .heart-bottom{position:absolute;left:50%;top:36%;width:100px;height:100px;background:linear-gradient(180deg,var(--accent),#ff5f9f);transform:translateX(-50%) rotate(45deg);border-radius:18px 18px 22px 22px}
+.heart-box.opening .heart-shape{transform:scale(0.98) rotate(-6deg)}
+.heart-box.opened{opacity:0;transform:scale(0.92) translateY(-10px);transition:opacity var(--mid) var(--ease-soft), transform var(--mid) var(--ease-soft)}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  :root{ --micro: 1ms; --mid: 1ms; --long: 1ms }
+  *{animation-duration:0.001ms!important;transition-duration:0.001ms!important}
+}
+
+@media (max-width:720px){
+  .response-text{width:88%}
+  .gif-placeholder.large{width:170px;height:170px}
+  .question{font-size:28px}
+  .btn{padding:10px 18px}
+}
+
+/* Final No-button evasive mode */
+.btn.final-evade{position:fixed;z-index:80;will-change:transform,left,top}
+.chat-head{
+  position:fixed;
+  pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+  padding:8px 12px;font-size:13px;font-weight:600;color:#5b2430;
+  background:linear-gradient(180deg,#ffdfe7,#ffd1dd);border-radius:999px;box-shadow:0 8px 20px rgba(80,20,40,0.08);
+  transform-origin:center center;opacity:0;transition:transform 700ms var(--ease-soft), opacity 700ms var(--ease-soft);
+}
+.chat-head.small{padding:6px 10px;font-size:12px}
+
+/* quick accent variants */
+.chat-head.alt{background:linear-gradient(180deg,#ffe7ef,#ffd0d8)}
+

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Will you be my Valentine?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="stage">
+      <header class="nav" id="topNav" aria-hidden="true">
+        <div class="nav-inner">
+          <button id="giftNav" class="nav-item">My Gift For You</button>
+        </div>
+      </header>
+
+      <div id="primaryStage" class="primary-stage" aria-live="polite">
+        <div id="stageContent" class="stage-content center-slot">
+          <div class="gif-placeholder" id="centerGif" aria-hidden="true">
+            <svg viewBox="0 0 100 100" class="heart-svg" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 77s-27-16-34-25c-12-16 4-30 17-22 6 4 10 11 17 11s11-7 17-11c13-8 29 6 17 22-7 9-34 25-34 25z" fill="#ff7fbf"/>
+            </svg>
+          </div>
+
+          <h1 class="question">Will you be my Valentine?</h1>
+
+          <div class="buttons" role="group" aria-label="Answer choices">
+            <button id="yesBtn" class="btn btn-yes">Yes</button>
+            <button id="noBtn" class="btn btn-no" aria-pressed="false">No</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
