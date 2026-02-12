@@ -432,220 +432,300 @@ function unwrapGift(){
 }
 
 function showBook(){
-  // Replace heart with a closed book in the same central spot
+  // Replace heart with flip card interface in the same central spot
   stageContent.innerHTML = '';
-  const book = document.createElement('div');
-  book.className = 'book closed';
-  const inner = document.createElement('div');
-  inner.className = 'book-inner';
-  const spine = document.createElement('div'); spine.className = 'book-spine';
-  const coverFront = document.createElement('div'); coverFront.className = 'book-cover cover-front cover-front-closed';
-  const coverBack = document.createElement('div'); coverBack.className = 'book-cover back cover-back';
-  const pageStack = document.createElement('div'); pageStack.className = 'page-stack pages';
-  // create left and right panes (left shows flipped pages, right shows current)
-  const leftPane = document.createElement('div'); leftPane.className = 'pane left';
-  const rightPane = document.createElement('div'); rightPane.className = 'pane right';
-  pageStack.appendChild(leftPane);
-  pageStack.appendChild(rightPane);
-  inner.appendChild(spine);
-  inner.appendChild(coverBack);
-  inner.appendChild(pageStack);
-  inner.appendChild(coverFront);
-  // overlay container for stacked left pages that must render above covers
-  const leftStack = document.createElement('div'); leftStack.className = 'left-stack';
-  inner.appendChild(leftStack);
-  book.appendChild(inner);
 
-  // Example pages and layered stack — support front/back content per page
+  // Add class to stage to align to top
+  document.querySelector('.stage').classList.add('gift-open');
+
+  // Example pages: support front/back content per page
   const pageContents = [
-    { front: '<h2>For You</h2><p>Roses are pink, dreams are sweet — I like you a whole lot.</p>', back: '<div style="text-align:center"><div style="width:140px;height:100px;background:#f3e7e9;border-radius:8px;display:inline-block"></div><p style="margin-top:8px;font-size:14px;color:#6b444f">Photo placeholder</p></div>' },
-    { front: '<h2>Memory</h2><p>Remember our laughs? Here is to many more.</p>', back: '<div style="text-align:center"><div style="width:140px;height:100px;background:#f3e7e9;border-radius:8px;display:inline-block"></div><p style="margin-top:8px;font-size:14px;color:#6b444f">Photo placeholder</p></div>' },
-    { front: '<h2>Promise</h2><p>Small adventures, deep affection — together forever?</p>', back: '<div style="text-align:center"><div style="width:140px;height:100px;background:#f3e7e9;border-radius:8px;display:inline-block"></div><p style="margin-top:8px;font-size:14px;color:#6b444f">Photo placeholder</p></div>' }
+    {
+      front: '<h2>Lovesick</h2>',
+      back: '<p>It remembers. It still yearns.</p>'
+    },
+    {
+      front: '<h2>For You</h2>',
+      back: '<p>— Bebii</p>'
+    },
+    {
+      front: '<h2>For the one who arrived lovingly —</h2>',
+      back: '<p>Showing me the poet is still alive.</p>'
+    },
+    {
+      front: '<h2>Chapter I: Beginnings</h2>',
+      back: '<p>In darkest days, in loneliest nights<br>My heart treads an inspired plight.<br>Weaving words as they were paths—<br>Eenie meenie minie moe, to enticing sights.<br><br>A step forward to the mist<br>Curiosity upon thy fist.<br>A lending hand to a former mate<br>Ever so slightly ajar to what he was about to face.<br><br>Maybe it was fate<br>Though it does not feel as such.<br>A lesson to behold<br>From the stories he\'s been told.<br><br>Another side<br>A new identity.</p>'
+    },
+    {
+      front: '<h2>Chapter 2: The Great Witness</h2>',
+      back: '<p>In here he saw— the queen of the night<br>"Why oh why", crying to the light.<br>Rambled and mumbled<br>The feelings he fought,<br>Waving the white flag he had always brought.<br><br>Cornered and afraid,<br>Valentine bliss, continues to break.<br><br>Seeking shelter for what became,<br>Reduced to cinders, embers maimed<br>Blaming the skies for what he dared to brave<br>Courage behind lies. Damn, he strayed.<br><br>The emotion that never belonged to him<br>A concept unbeknownst to him<br>Ill-fit for a boy who never knew to love<br>Ill-fitting as it may—<br><br>he now sought.</p>'
+    },
+    {
+      front: '<h2>Chapter 3: He came. He saw. He fell.</h2>',
+      back: '<p>Felled to claim the superseding desire,<br>Seeking shadows leading to the fire.<br>Coital splices spanning a millennium,<br>An empty husk of the burning emporium.<br><br>T\'was the Joker.<br>The greatest pretender.<br>A volunteering naïveté to his grandest schemes,<br>Falling deeper in the vast seas.<br><br>They fancied themselves students of anatomy.<br>Faithful to the discipline —<br>Tracing chambers, naming arteries,<br>Yet never once hearing it break.<br><br>The first cracks of an impending streak.</p>'
+    },
+    {
+      front: '<h2>Chapter 4: And So, It Began.</h2>',
+      back: '<p>Morning breeze, warming tweets.<br>A bird brought him something sweet.<br>Another facade to an incomplete hangar,<br>Hiding scars to falling letters.<br><br>Pray tell, what does this mean?<br>Far-fetched similarities to the former stream.<br>An empty rack amidst the flood,<br>Vanishing coats he gave to the fool.<br><br>The northern star was a mere fluke,<br>Path led astray to an unknown sphere.<br>Wounding up in places he had always feared,<br><br>Back and cornered once more he is,<br>For the pain of unknowingly hurting scored another tear.</p>'
+    },
+    {
+      front: '<h2>Chapter 5: Frailty</h2>',
+      back: '<p>Gone in shapes, forms in phrases.<br>Riddled in edges, a circle he traipsed.<br>Round and round he goes,<br>Unending echoes of a door that closed.<br><br>Fraught with desperation,<br>Polaroid spaces and weird incantations.<br>Relentless knocks to an already closed door.<br>Chasing echoes of a finished lore.<br><br>Fragile and Afraid.<br>Unsheathing a blade.<br>A horrified stare to woven paths,<br>Dangerous fares with darkness intact.<br><br>The heart remembers,<br>The mind does not.<br>For the cracks of identity,<br>Covers him plenty.<br><br>Outward no more,<br>Slumbering forevermore.</p>'
+    },
+    {
+      front: '<h2>Chapter 6: The War Within</h2>',
+      back: '<p>Withered trees, splintered glees.<br>Random strangers, uproar bliss<br>A sped-up timeline, the echoes of time—<br>Craving lifelines, across lovetimes.<br><br>It is the crippling lapse of a boy in pain,<br>Masked in scars in obvious ways.<br>Sought solace in lights galore,<br>Partied non-stop \'til he is no more.<br><br>And there he glimpsed the queen of the night.<br>"Oh, Luna" he cried, "Hear my plight".<br>Plenty there are under these lights<br>None comes close to his ideal sight<br><br>Heavy is the crown, so thought he was.<br>Light as a feather, the feelings they passed.<br><br>"I bear the weight" he did as much.<br>And there it began— the war of none.<br><br>Chasing traces…<br><br>In clubs that pleases.</p>'
+    },
+    {
+      front: '<h2>Chapter 7: The Calm of Becoming</h2>',
+      back: '<p>Days to weeks, weeks to months.<br>There he lies an intoxicated runt.<br>Dreaming though as he is awake,<br>Endured again for another stake.<br><br>Lucid, nay a daydreaming guy,<br>To beguile his wake and troubled lie.<br>In search for more, risk with a die<br>Another roll, another kiss to strive.<br><br>Such is the way of semantics,<br>In between the lines lies his antics.<br><br>Infatuated with what once was,<br>Realized the danger of the broken glass.<br>No more does he linger staring at the mirror,<br>A reflection filled with sordid pictures.<br><br>It is, what\'s called, a beautiful lie.<br>Vowed never again to go with the ride.<br><br>And yet, wait. There\'s more to be told.<br>Further tales to explore,<br>Deeper lies to implore.</p>'
+    },
+    {
+      front: '<h2>Chapter 8: Liberation</h2>',
+      back: '<p>"Every breath feels like the rarest air,<br>When you\'re not sure they wanted to be there"<br><br>A quiet reflection in the loudest chaos,<br>Candor carried through the workday\'s labor.<br>He pressed toward life\'s small valor,<br>Holding meaning as his own savior.<br><br>Redact the abstract —<br>Keep the act.<br>White lies thinned beneath the blue skies,<br>Truth settling where silence lies.<br><br>He did. Face to face.<br>Heartening glares, steady and chaste.<br>He needed not knock —<br>He simply waited.<br>Closure once chased<br>Now stood quietly at his gaze.<br><br>And there, he understood.<br>He felt — and felt for good.<br><br>No longer chasing traces,<br>He rests in safer spaces,<br>Held by a quiet truth that saves.</p>'
+    },
+    {
+      front: '<h2>Chapter 9: New Beginnings</h2>',
+      back: '<p>A chilling breeze surges through the air,<br>Feeling much warmer in each fare.<br>The last wafts of december,<br>Onwards through the month of embers.<br><br>Then again, it must still be chilly,<br>Because he is still alone— "willingly".<br>Though he does not mind the cold,<br>For he finds comfort in the old chaos he sold.<br><br>Soft warmths as if it were hugs,<br>Thawing what\'s left of this numb little bug.<br>Traumatic storms of this foolish jester,<br>Now weathered with steadier tether.<br><br>A step new, fresh sceneries in view.<br>Marching onwards in a different hue.<br>Old memories clinging as far,<br>Kept as lessons as they are.</p>'
+    },
+    {
+      front: '<h2>Chapter 10: Reignition</h2>',
+      back: '<p>A chill drifts through the northern air,<br>Where misted streets braid towers fair.<br>He moves along the pine-clad ways,<br>A heart long gray in winter\'s haze.<br><br>Letters arrive like lanterns bright,<br>Across the distance, into night.<br>He feels the warmth they softly bring,<br>A tiny spark, a quiet spring.<br><br>Through frosted eaves and quiet lanes,<br>He senses comfort in the pains.<br>A month of cautious, tender care,<br>Moments small, yet wholly there.<br><br>Patience bridges time and space,<br>He holds it close, he keeps the pace.<br>In distant Baguio, mist and pine,<br>He tastes a joy that feels divine.<br><br>The slumbering heart lifts, starts to see,<br>That love can bloom, though far it be.<br>Not with fury, nor storm, nor fight,<br>But gentle dawns that fill his night.</p>'
+    },
+    {
+      front: '<h2>Chapter 11: What the Light Casts</h2>',
+      back: '<p>He walks in warmth of fading sun,<br>A path once shadowed, now begun.<br>The world outside both bright and dim,<br>Yet gentle light falls soft on him.<br><br>Fires kindle in steady hands,<br>Moments treasured, no demands.<br>Each glance, each laugh, each quiet care,<br>Builds a life they slowly share.<br><br>Yet shadows linger in the frame,<br>Whispers of a past untamed.<br>A voice that calls from distant shores,<br>Echoing lessons, oldened scores.<br><br>He feels the weight, yet breathes it light,<br>For what is dark will meet the bright.<br>Hands entwined beneath a sheltered sky,<br>Soft as the clouds that wander by.<br><br>And in this glow, he comes to see,<br>How hearts can roam and still be free.<br>The light reveals what shadows cast,<br>Yet even there, he\'s free at last.</p>'
+    },
+    {
+      front: '<h2>Chapter 12: Halloween, Unironically</h2>',
+      back: '<p>Festivity lingered in horror\'s domain,<br>College souls dressed wicked and vain.<br>I went unprepared — a spontaneous whim,<br>As hereditary teen, Peter Graham within.<br><br>Makeup scattered across the counter,<br>Friends in costumes — each a haunter.<br>Then a familiar chime from a yellow app…<br>Who was the man behind that tap?<br><br>Intrigued, he was.<br>In love — he was not.<br><br>Through the night as we tricked for delight,<br>My gaze found warmth in spectral light.<br>A skeleton suit — Phoebe Bridgers inspired,<br>On an Asian boy quietly admired.<br><br>Wild drinks poured in España\'s glow,<br>Bandanas turned heads to and fro.<br>Hot as they were, bold in their pose —<br>None came close<br><br>To what his heart, in briefness, chose.</p>'
+    },
+    {
+      front: '<h2>Chapter 13: A Final Chance I Took</h2>',
+      back: '<p>That day, in that place,<br>We met in a seemingly familiar space.<br>Coffee steaming, laptops aglow,<br>A writer and a poet, letting words flow.<br><br>It was not love at first sight,<br>But something warmer, something right.<br>We were two peas in a shared pod,<br>Laughing, talking, as if blessed by a god.<br><br>Sunlight danced through taft\'s plains.<br>Highlighting cheeks, hair in soft refrain.<br>Every gesture, a quiet art,<br>Every laugh a gentle tug at the heart.<br><br>Somewhere inside me, I quietly felt,<br>The sheer bliss of ignorance softly dealt.<br>Questioning the world for what might be brief,<br>Better that than drown in regrets and grief.<br><br>I traced your words on the coffee cup,<br>Small movements that made my heartbeat erupt.<br>Time slowed, yet the moment felt vast,<br>A bridge from the past into something that lasts.</p>'
+    },
+    {
+      front: '<h2>Chapter 14: Beneath the Stars of a Sunken Garden</h2>',
+      back: '<p>A Porygon-Z perched lightly on my pinky,<br>We sat together atop the grassy hills, unthinking.<br>Your eyes sparkled like stars beneath the evening,<br>Your laughter rolling through the air, a gentle weaving.<br><br>The sun had melted into the horizon\'s seam,<br>Casting amber and rose over our shared dream.<br>Mango trees swayed in the evening breeze,<br>Their leaves whispering secrets through the UPD seas.<br><br>We wandered through the sunken gardens, quiet and wide,<br>Tracing the steps where shadows and sunlight collide.<br>Marble benches, mossy stones, the scent of damp earth,<br>Every corner a quiet testament to laughter and mirth.<br><br>Your smile stretched wider than the river\'s arc,<br>Illuminating corners long left dark.<br>We watched the sky bleed into purple and gold,<br>A soft eternity in a world that felt ours to hold.<br><br>Small touches, fingers brushing, a gentle nudge,<br>The campus lights flickering, a dim amber fudge.<br>Every quiet glance, a story untold,<br>Every laugh, a treasure more precious than gold.<br><br>So this is what a Roman Empire feels like,<br>Not of conquest, but of warmth, soft and bright.<br>A kingdom built in laughter and gaze,<br>A reign of small moments, of golden days.</p>'
+    },
+    {
+      front: '<h2>Chapter 15: Taste of Paradise</h2>',
+      back: '<p>That night of a thousand fireflies,<br>Your shining gaze — a beautiful guise.<br>Necessary — oh, wholly necessary,<br>The quiet requisites of a night I carry.<br><br>An empty room, the world elsewhere,<br>Just you and I, and borrowed air.<br>A single bed where timid hearts fell,<br>Into a story neither could yet tell.<br><br>Mac and cheese drifting warm through the air,<br>Soft little comforts waiting there.<br>My first dinner with the one I yearned,<br>A fragile page at last being turned.<br><br>Sparks unraveled where our bodies lay,<br>Raw and open in their own strange way.<br>Cold was the night — yet wonderful still,<br>A trembling warmth no silence could kill.<br><br>The simple touch of your steady frame,<br>Your heartbeat calling mine by name.<br>Each quiet thrum seemed to decree<br>Permission for my own to be free.<br><br>Harmony traveled across the walls,<br>As if our breaths composed its calls.<br>We hurled our dreams into the night —<br>Not knowing if they\'d land just right.<br><br>Let them fall — if fall they must,<br>For beside me slept the dream I trust.</p>'
+    },
+    {
+      front: '<h2>Chapter 16: Unexpectedly Anticlimactic</h2>',
+      back: '<p>A day I remember like it was yesterday,<br>A simple time, of a near and brief perfect day.<br><br>In MindZone’s hum, amidst thesis and pen,<br>We walked the hallways, just quietly then.<br><br>I asked, “Do you want this?” he said, “Yes, I do,”<br>“So we’re partners now?” “Yes,” came true.<br><br>No grand display, no staged delight,<br>Just two hearts folding in the softest light.<br><br>Unexpectedly anticlimactic, yet perfectly ours,<br>A beginning whispered, no need for towers.</p>'
+    },
+    {
+      front: '<h2>Chapter 20: Whispers of Valentine</h2>',
+      back: '<p>Our first Valentine arrived without spectacle,<br> no orchestras, no rehearsed miracles —<br> just you and I learning how love eats.<br>Smoke curled upward from the samgyupsal grill,<br> and time slowed between the turning of meat.<br> You discovered the tofu —<br> held it like a fragile revelation,<br> eyes bright over something so simple.<br><br>We cooked too much, as if hunger could measure devotion,<br> and forced laughter between bites,<br> determined not to be fined for loving excessively.<br> Bloated, breathless, ridiculous —<br> yet I swear my heart made room for more of you.<br><br>Later, at Odd Café,<br> we spoke in the fluent silence only lovers understand.<br> The skyline hid behind Salcedo’s towering ribs,<br> but even obstructed, the view felt endless —<br> because you were there.<br><br>That night whispered nothing grand,<br> yet everything within me answered:<br><br>If this is ordinary love,<br> let it be mine forever.</p>'
+    },
+    {
+      front: '<h2>Chapter 21: Best of Luck, Indeed</h2>',
+      back: '<p>You brought me to a place called Best of Luck,<br> and without knowing it,<br> rewrote the fortune I thought was mine.<br><br>Salted egg —<br> golden, decadent, unapologetic —<br> a flavor that did not ask permission to change me.<br> Each bite unfolded like a secret corridor,<br> leading somewhere softer, somewhere certain.<br><br>Across the table sat the man<br> who made unfamiliar worlds feel inhabitable.<br><br>I once believed myself born under reluctant stars,<br> a constellation tilted toward solitude.<br> But that night corrected the sky.<br><br>Because luck, I learned,<br> is not a number nor a prophecy —<br> it is the quiet miracle<br> of being chosen<br> while you are busy choosing back.<br><br>And there you were.<br>My Best of Luck, indeed.</p>'
+    },
+    {
+      front: '<h2>Chapter 22: What the City Offers</h2>',
+      back: '<p>BGC had always been my refuge —<br> a city I fled to when the world grew teeth.<br> Its streets knew my solitude,<br> its lights rehearsed my healing.<br><br>But cities transform<br> when witnessed beside the right soul.<br><br>Nothing changed —<br> the same glass towers,<br> the same patient avenues —<br> yet everything deepened.<br><br>Poetry walked differently when your hand found mine.<br> Silence no longer echoed; it rested.<br> Even the air seemed gentler,<br> as if the city itself approved.<br><br>What was once an escape<br> became an arrival.<br><br>You did not replace my sanctuary —<br> you illuminated it.<br><br>And suddenly,<br> the place I ran to<br> became the place I wished to stay.</p>'
+    },
+    {
+      front: '<h2>Chapter 23: Splendor Rain</h2>',
+      back: '<p>We meant only to visit Sunken Garden,<br> to stroll through memory without disturbance —<br> but the heavens had other compositions prepared.<br><br>Rain descended with operatic force,<br> thunder stitching the sky open.<br>Yet joy — reckless, radiant joy —<br> erupted between us.<br><br>We laughed at the absurdity,<br> ran without urgency,<br> watched the earth darken into perfume.<br><br>You stood there —<br> umbrella trembling under silver assault —<br> beautiful in that unguarded way<br> that makes the world briefly forget its chaos.<br><br>Tell me, what is rain<br> if not permission to be young again?<br><br>Dinner at Yabu followed —<br> two Chinese-born hearts<br> finding home in Japanese warmth,<br> proof that love ignores borders<br> the way rivers ignore maps.<br><br>Storm-soaked and glowing,<br> I realized:<br><br>Even tempests become splendor<br> when survived beside you.</p>'
+    },
+    {
+      front: '<h2>Chapter 24: Our Pride</h2>',
+      back: '<p>Of all our days,<br> this one refuses to fade.<br><br>Our first Pride —<br> not as fragments of ourselves,<br> but as a declaration walking upright.<br><br>Crowds roared in colors language cannot hold.<br> And there you were beside me<br> when I chose courage over quiet —<br> even in the sterile stillness of a clinic room.<br><br>You steadied me without spectacle,<br> held space for fears I pretended not to have.<br> When the results returned — negative, victorious —<br> relief tasted almost holy.<br><br>I pinched your cheeks to dissolve your worry,<br> laughter dissolving the last of my dread.<br><br>We captured a photograph —<br> ink against forgetting —<br> a relic of the day we stood unhidden.<br><br>Yes, my friend followed somewhere in our orbit —<br>less an interruption,<br>more a gentle witness<br>to the day we learned how visible love can be.<br><br>That day I learned pride is not noise —<br> it is the quiet refusal<br> to live unlived.<br><br>And with you,<br> I have never felt more real.</p>'
+    },
+    {
+      front: '<h2>Chapter 25: Part of Me</h2>',
+      back: '<p>Family is a threshold few are invited to cross.<br> You did not step —<br> you were welcomed.<br><br>What began as a surprise birthday for my father<br> became something far more irreversible:<br> your gentle initiation into the Santos constellation.<br><br>Jollibee laughter filled the air,<br> children shrieking, elders reminiscing —<br> life in its loud, affectionate excess.<br><br>And there you were,<br> not distant, not ornamental —<br> but folding seamlessly into the fabric.<br><br>I watched conversations find you,<br> watched my world widen to accommodate your name.<br><br>In that ordinary celebration,<br> something sacred occurred:<br><br>You were no longer merely the one I loved —<br> you became part of where I come from.<br><br>Part of my history.<br> Part of my becoming.<br> Part of me.</p>'
+    },
+    {
+      front: '<h2>Chapter 26: Photograph</h2>',
+      back: '<p>We keep this love in a photograph —<br> not trapped,<br> but preserved in perpetual arrival.<br><br>Your eyes, luminous as first mornings.<br> Our hearts — mid-beat, mid-promise.<br> Time pausing long enough<br> to remember us correctly.<br><br>When distance sharpens its quiet knives,<br> I return to that image.<br> There, we are unafraid.<br> There, we are certain.<br><br>A single frame —<br> yet it speaks in infinite dialects.<br><br>It tells me permanence is not measured in years<br> but in the gravity of presence.<br><br>Market Market — worn, familiar —<br> became cathedral enough<br> for a memory reborn.<br><br>Because love does this:<br> it renovates the ordinary<br> until it gleams.<br><br>And in that captured second,<br> you were not merely beside me —<br><br>you were already<br> home.</p>'
+    },
+    {
+      front: '<h2>Chapter 27: The Canadian</h2>',
+      back: '<p>Rain baptized Poblacion that night,<br> streets glossed in trembling neon,<br> as I waited outside Tango —<br> half-drenched, wholly expectant.<br><br>Then your car arrived,<br> and with it, pieces of the life you lived before me.<br><br>Your childhood friend —<br> fresh from Canada, bright with returning warmth —<br> met me not as a stranger<br> but as someone already spoken for.<br><br>Five of us became six,<br> six became a constellation —<br> couples orbiting the same fearless gravity.<br><br>I had never stood inside a room<br> so unapologetically alive with love.<br><br>We danced without rehearsal,<br> sang like the night had lungs of its own,<br> laughter spilling into rain-washed streets.<br><br>And somewhere between the basslines<br> and your hand finding mine,<br> a quiet realization bloomed:<br><br>I was no longer visiting your world —<br> I was being woven into it.<br><br>Acceptance is rarely announced.<br> Sometimes it is simply felt<br> in the way space opens for you to belong.<br><br>That night, beneath the sky’s soft collapse,<br> I belonged.</p>'
+    },
+    {
+      front: '<h2>Chapter 28: Our Roots, Quarterly Mine</h2>',
+      back: '<p>Binondo greeted us with its ancient pulse —<br> lantern-lit arteries,<br> history simmering in every doorway.<br><br>Steam rose from bowls of noodles<br> like prayers finally answered.<br> Baos — tender, bursting —<br> small suns cradled in bamboo.<br><br>We found that retro television,<br> our reflections flickering inside it,<br> two lovers briefly mistaken for memory.<br><br>The world tasted fuller there —<br> salt, broth, sweetness, discovery.<br><br>What seemed like a simple excursion<br> quietly rooted us deeper.<br><br>Because love is not only forged in grand gestures —<br> it grows in wandering,<br> in shared hunger,<br> in streets walked without urgency.<br><br>Binondo did not merely host us.<br><br>It planted us.</p>'
+    },
+    {
+      front: '<h2>Chapter 29: Anniversary</h2>',
+      back: '<p>One year.<br><br>Once, that number felt unreachable —<br> a horizon dissolving before I could arrive.<br><br>Yet there we were.<br><br>Lan Hotpot simmered between us,<br> broth rolling like time made visible.<br><br>I handed you flowers —<br> my first for you.<br> Fragile, inconvenient, impossible to bring home.<br><br>You loved them anyway.<br><br>Not for their bloom,<br> but for the hands that chose them.<br><br>Then you revealed your gift —<br> Cinnabon cinnamon rolls,<br> sinfully sweet, unmistakably you.<br><br>I kissed you without thinking.<br> Some joys refuse restraint.<br><br>That night did more than celebrate duration —<br> it dismantled an old fear:<br><br>that everyone I love eventually leaves.<br><br>But you stayed.<br> You stayed through the ordinary,<br> through the unremarkable days that truly measure devotion.<br><br>And in staying,<br> you quieted storms I had long mistaken for climate.<br><br>One year —<br> not just survived,<br> but lived.</p>'
+    },
+    {
+      front: '<h2>Chapter 30: Halloween Special</h2>',
+      back: '<p>You were Fester.<br> I, Lurch —<br> grotesque only in costume,<br> ridiculous in the best ways.<br><br>Among friends and flickering lights,<br> we surrendered to laughter again,<br> as if adulthood were optional for one night.<br><br>There is a peculiar intimacy<br> in being foolish together —<br> in loving someone who sees your absurdity<br> and draws nearer, not away.<br><br>Some bonds deepen not through confession,<br> but through shared delight.<br><br>And that night,<br> joy wore our faces well.</p>'
+    },
+    {
+      front: '<h2>Chapter 31: What the Meows Chose</h2>',
+      back: '<p>Grand Venice unfolded like a painted dream —<br> bridges arching gently,<br> water pretending to remember Italy.<br><br>I imagined us drifting in a boat,<br> shoulder to shoulder,<br> letting the current decide our pace.<br><br>But even without the ride,<br> romance arrived effortlessly.<br><br>Perhaps love does not require canals —<br> only companionship.<br><br>If given another evening there,<br> I would ask for nothing elaborate.<br><br>Just your hand.<br> Just the quiet agreement<br> to walk nowhere in particular, together.</p>'
+    },
+    {
+      front: '<h2>Chapter 32: Flopsplanade, Foulsplanade</h2>',
+      back: '<p>Estancia began in elegance —<br> art breathing along white walls,<br> creativity humming softly.<br><br>Then came the Esplanade.<br><br>My stomach staged its rebellion,<br> the river carried an honesty best left unsmelled,<br> and hunger lowered our standards to comedy.<br><br>Duplicate stalls promised abundance —<br> delivered catastrophe.<br><br>Gravy thin as doubt,<br> rice glowing an unnatural yellow,<br> nachos baptized in ketchup.<br><br>Yet we laughed —<br> that helpless, tear-bright laughter<br> born only from shared inconvenience.<br><br>Because love reveals itself most clearly<br> when things go wrong<br> and neither of you walks away annoyed.<br><br>Even disappointment becomes anecdote<br> when joy insists on surviving it.</p>'
+    },
+    {
+      front: '<h2>Chapter 33: Our Dream</h2>',
+      back: '<p>Gramercy lifted us above the city\'s restless grammar —<br> windows opening into constellations of electricity.<br><br>For one suspended night,<br> we borrowed a life we had only imagined.<br><br>The skyline stretched endlessly,<br> and so, it seemed, did we.<br><br>Our closeness that evening felt less like discovery<br> and more like recognition —<br> two souls learning the language of trust<br> without needing translation.<br><br>Later, I cooked for you — pasta, imperfect but earnest —<br> our first meal shaped by our own hands.<br> Pizza joined us, humble and celebratory.<br><br>On the balcony,<br> Luna presided — silent, sovereign —<br> as we poured stories into the dark.<br><br>Dreams are often loud things,<br> but that night proved otherwise.<br><br>Sometimes a dream<br> is simply the right person beside you<br> while the world glitters below.</p>'
+    },
+    {
+      front: '<h2>Chapter 34: Your Day</h2>',
+      back: '<p>At Versus, the arcade lights flickered<br> like fragments of adolescence returned.<br><br>We drank, sang, shouted lyrics we barely knew —<br> grown bodies reclaiming reckless youth.<br><br>But my favorite moment<br> was not the noise.<br><br>It was the way you leaned into me,<br> smiling as if the entire bar<br> were merely background.<br><br>On your birthday,<br> surrounded by friends,<br> I understood something quietly monumental:<br><br>Your happiness had become<br> one of my native languages.</p>'
+    },
+    {
+      front: '<h2>Chapter 35: New n+♾️</h2>',
+      back: '<p>Another Christmas —<br> and this time, you were inside it with me.<br><br>Though faith never claimed me,<br> the warmth of gathering always did.<br> And you — greeted with effortless joy —<br> fit into every embrace.<br><br>Watching my family welcome you<br> felt like witnessing two rivers merge<br> without turbulence.<br><br>Then another year turned,<br> and still, you remained.<br><br>Days stacked gently into months,<br> months into something approaching forever.<br><br>Love, I’ve learned,<br> does not dull with repetition —<br> it accumulates light.<br><br>And with every passing calendar,<br> my heart did not tire.<br><br>It widened.</p>'
+    },
+    {
+      front: '<h2>Chapter 36: Vintage is the New Romance</h2>',
+      back: '<p>Meeting those you love<br> is a privilege I never take lightly.<br><br>Your brother, his world,<br> the quiet honor of being invited near it —<br> these are thresholds, not casual crossings.<br><br>Wine flowed, laughter loosened the evening,<br> and somewhere between mishaps<br> and impulsive vintage finds,<br> I felt history expanding to include me.<br><br>Nothing whispers permanence louder<br> than being introduced<br> to the people who shaped the one you cherish.<br><br>That night was less about celebration —<br> and more about inclusion.<br><br>I was no longer adjacent to your life.<br><br>I was inside it.</p>'
+    },
+    {
+      front: '<h2>Chapter 37: Singularity</h2>',
+      back: '<p>Looking back,<br> I see now that love was never a transaction.<br><br>Hope was not naïveté —<br> it was intuition waiting for proof.<br><br>You did not resurrect the poet in me.<br> You revealed he had been breathing all along,<br> patient beneath the rubble of former endings.<br><br>In loving you,<br> I found the self I once misplaced —<br> still capable of depth,<br> still fluent in wonder.<br><br>If this book concludes here,<br> let it not be mistaken for an ending.<br><br>Because what we have entered<br> does not behave like chapters.<br><br>It behaves like the universe —<br> expanding, unfinal,<br> beautifully without edge.<br><br>A singularity, then:<br><br>Where two lives collapse into one gravity,<br> and from that convergence,<br> infinity begins.</p>'
+    }
   ];
 
-  // create page elements but only insert the first onto the right pane; others are prepared
-  const pages = pageContents.map((item,i)=>{
-    const p = document.createElement('div');
-    p.className = 'page edge-shimmer';
-    p.innerHTML = `<div class="page-content">${item.front}</div><div class="page-back" aria-hidden="true">${item.back}</div>`;
-    p.dataset.index = String(i);
-    p.style.zIndex = String(80 - i);
-    if(i !== 0) p.classList.add('off');
-    return p;
-  });
+  // Create wrapper with perspective
+  const wrapper = document.createElement('div');
+  wrapper.className = 'flip-card-wrapper entering';
+  
+  // Create card template
+  let cardHTML = `<button class="flip-card" data-current-page="0" type="button" aria-label="Flip card">`;
+  
+  // Add all pages as virtual data (only one rendered at a time)
+  cardHTML += pageContents.map((page, idx) => `
+    <div class="flip-card-side flip-card-front" data-page="${idx}">
+      <div class="flip-card-content">
+        ${page.front}
+      </div>
+    </div>
+    <div class="flip-card-side flip-card-back" data-page="${idx}">
+      <div class="flip-card-content ${idx < 3 ? 'centered' : ''}">
+        ${page.back}
+      </div>
+    </div>
+  `).join('');
+  
+  cardHTML += `</button>`;
+  cardHTML += `
+    <div class="page-indicator"><span id="pageNum">1</span> / <span id="pageTotal">${pageContents.length}</span></div>
+  `;
+  
+  wrapper.innerHTML = cardHTML;
+  stageContent.appendChild(wrapper);
 
-  // left placeholder (cover inner / blank) so left stack always has something
-  const leftPlaceholder = document.createElement('div');
-  leftPlaceholder.className = 'page left-placeholder static-left';
-  leftPlaceholder.innerHTML = `<div class="page-content"><p style="opacity:0.38;color:#6b444f">&nbsp;</p></div>`;
-  leftStack.appendChild(leftPlaceholder);
-
-  // show first page on right pane
-  if(pages[0]){
-    pages[0].classList.remove('off');
-    pages[0].classList.add('static-right');
-    rightPane.appendChild(pages[0]);
-  }
-
-
-
-  // append book and reserve stage space so layout doesn't shift
-  stageContent.appendChild(book);
-  // reserve space so book doesn't push other layout when opening
-  stageContent.classList.add('book-present');
-
-  // create invisible hit areas for left/right interactions (no visible buttons)
-  const hitLeft = document.createElement('div'); hitLeft.className = 'hit-area hit-left';
-  const hitRight = document.createElement('div'); hitRight.className = 'hit-area hit-right';
-  book.appendChild(hitLeft); book.appendChild(hitRight);
-
-  // clear reserved minHeight so layout can settle
-  // clear any reserved sizing (stage container itself stays fixed)
-  stageContent.style.minHeight = '';
-
-  // subtle book entrance
-  requestAnimationFrame(()=>{
-    book.classList.add('book-enter');
-    // ensure the book is closed initially
-    book.classList.add('closed');
-    book.style.opacity = '1';
-  });
-
-  // open when the front cover is clicked (keep book centered)
-  const front = book.querySelector('.cover-front');
-  function openCoverOnce(){
-    front.removeEventListener('click', openCoverOnce);
-    book.classList.remove('closed');
-    book.classList.add('open');
-    front.classList.remove('cover-front-closed');
-    front.classList.add('cover-front-open');
-
-    // slight page bend for tactile feel
-    setTimeout(()=>{
-      const first = pages[0];
-      if(first){
-        first.classList.add('curl');
-        first.style.transform = 'rotateY(-8deg) translateZ(6px)';
-        setTimeout(()=>{ first.style.transform = 'rotateY(0deg) translateZ(0px)'; first.classList.remove('curl'); }, 420);
-      }
-    }, 220);
-  }
-  front.addEventListener('click', openCoverOnce);
-
-  // page turn logic
-  let current = 0;
+  const card = wrapper.querySelector('.flip-card');
+  const pageIndicator = wrapper.querySelector('#pageNum');
+  const totalPages = pageContents.length;
+  
+  let currentPage = 0;
+  let isFlipped = false;
   let isAnimating = false;
-  const indicator = document.createElement('div');
-  indicator.className = 'sr-only';
-  indicator.id = 'pageIndicator';
-  indicator.textContent = `1 / ${pages.length}`;
-  book.appendChild(indicator);
 
-  function turnTo(nextIndex){
-    if(nextIndex === current) return;
+  // Hide all pages except current one
+  function updatePageVisibility(){
+    card.querySelectorAll('[data-page]').forEach(el => {
+      const pageNum = parseInt(el.getAttribute('data-page'));
+      el.style.display = pageNum === currentPage ? 'flex' : 'none';
+    });
+    pageIndicator.textContent = currentPage + 1;
+    card.setAttribute('data-current-page', currentPage);
+  }
+
+  // Initial page display
+  updatePageVisibility();
+
+  // Animation for entering
+  requestAnimationFrame(()=> {
+    wrapper.classList.remove('entering');
+  });
+
+  // Flip card on click
+  card.addEventListener('click', (e) => {
+    e.preventDefault();
     if(isAnimating) return;
-    isAnimating = true;
-    
-    // temporarily disable hit areas
-    if(hitLeft) hitLeft.style.pointerEvents = 'none';
-    if(hitRight) hitRight.style.pointerEvents = 'none';
-    
-    const from = pages[current];
-    const to = pages[nextIndex];
-    const forward = nextIndex > current;
 
-    if(forward){
-      // prepare next page on right pane
-      if(to){
-        while(rightPane.firstChild) rightPane.removeChild(rightPane.firstChild);
-        to.classList.remove('off');
-        to.classList.add('static-right');
-        rightPane.appendChild(to);
-      }
-
-      // slide current page left and transition to back
-      from.classList.add('sliding', 'slide-forward');
-      
-      const onSlideEnd = (e)=>{
-        if(e && e.propertyName && e.propertyName.indexOf('transform') === -1) return;
-        from.removeEventListener('transitionend', onSlideEnd);
-        
-        // swap content to back
-        const frontContent = from.querySelector('.page-content');
-        const backContent = from.querySelector('.page-back');
-        if(frontContent) frontContent.style.display = 'none';
-        if(backContent) backContent.style.display = 'block';
-        
-        // move to left stack
-        from.classList.remove('slide-forward', 'sliding', 'static-right');
-        from.classList.add('static-left');
-        from.style.transform = '';
-        leftStack.appendChild(from);
-        
-        isAnimating = false;
-        // re-enable hit areas
-        if(hitLeft) hitLeft.style.pointerEvents = '';
-        if(hitRight) hitRight.style.pointerEvents = '';
-      };
-      from.addEventListener('transitionend', onSlideEnd);
+    if(!isFlipped){
+      // First click: flip to back
+      isFlipped = true;
+      card.classList.add('flipped');
     } else {
-      // backward: slide last left page back to right
-      const lastLeft = leftStack.lastElementChild;
-      if(lastLeft && !lastLeft.classList.contains('left-placeholder')){
-        lastLeft.classList.add('sliding', 'slide-back');
-        
-        const onSlideBackEnd = (e)=>{
-          if(e && e.propertyName && e.propertyName.indexOf('transform') === -1) return;
-          lastLeft.removeEventListener('transitionend', onSlideBackEnd);
-          
-          // swap content to front
-          const frontContent = lastLeft.querySelector('.page-content');
-          const backContent = lastLeft.querySelector('.page-back');
-          if(backContent) backContent.style.display = 'none';
-          if(frontContent) frontContent.style.display = '';
-          
-          // clear right and move to right pane
-          while(rightPane.firstChild) rightPane.removeChild(rightPane.firstChild);
-          lastLeft.classList.remove('slide-back', 'sliding', 'static-left');
-          lastLeft.classList.add('static-right');
-          lastLeft.style.transform = '';
-          rightPane.appendChild(lastLeft);
-          
+      // Second click: move to next page
+      if(currentPage < totalPages - 1){
+        // Exit current card and load next one
+        isAnimating = true;
+        card.classList.add('exiting');
+        setTimeout(() => {
+          currentPage++;
+          isFlipped = false;
+          card.classList.remove('flipped', 'exiting');
+          updatePageVisibility();
           isAnimating = false;
-          // re-enable hit areas
-          if(hitLeft) hitLeft.style.pointerEvents = '';
-          if(hitRight) hitRight.style.pointerEvents = '';
-        };
-        lastLeft.addEventListener('transitionend', onSlideBackEnd);
+        }, 400);
+      } else {
+        // Last page: just flip back to front
+        isFlipped = false;
+        card.classList.remove('flipped');
       }
     }
+  });
 
-    current = nextIndex;
-    indicator.textContent = `${current+1} / ${pages.length}`;
-  }
+  // Keyboard navigation (arrow keys)
+  const keyHandler = (e) => {
+    const flipCard = document.querySelector('.flip-card');
+    if(!flipCard || isAnimating) return;
 
-  // hit areas attach to turn events (no wrap-around)
-  hitRight.addEventListener('click', (e)=>{ e.stopPropagation(); if(current < pages.length - 1) { const next = current + 1; turnTo(next); } });
-  hitLeft.addEventListener('click', (e)=>{ e.stopPropagation(); if(current > 0) { const prev = current - 1; turnTo(prev); } });
+    if(e.key === 'ArrowRight'){
+      e.preventDefault();
+      flipCard.click();
+    } else if(e.key === 'ArrowLeft'){
+      e.preventDefault();
+      if(isFlipped){
+        // If showing back, flip to front
+        isFlipped = false;
+        card.classList.remove('flipped');
+      } else if(currentPage > 0){
+        // If showing front, go back
+        isAnimating = true;
+        card.classList.add('exiting');
+        setTimeout(() => {
+          currentPage--;
+          isFlipped = true;
+          card.classList.remove('exiting');
+          card.classList.add('flipped');
+          updatePageVisibility();
+          isAnimating = false;
+        }, 400);
+      }
+    }
+  };
+  document.addEventListener('keydown', keyHandler);
 
-  // touch support: swipe left/right to turn pages
+  // Touch/swipe support
   let touchStartX = null;
-  pageStack.addEventListener('touchstart', (ev)=>{ touchStartX = ev.touches[0].clientX; }, {passive:true});
-  pageStack.addEventListener('touchend', (ev)=>{
-    if(touchStartX === null) return;
-    const dx = (ev.changedTouches[0].clientX - touchStartX);
+  card.addEventListener('touchstart', (ev) => { touchStartX = ev.touches[0].clientX; }, {passive:true});
+  card.addEventListener('touchend', (ev) => {
+    if(touchStartX === null || isAnimating) return;
+    const dx = ev.changedTouches[0].clientX - touchStartX;
     if(Math.abs(dx) > 40){
-      if(dx < 0) { if(current < pages.length - 1) { const next = current + 1; turnTo(next); } }
-      else { if(current > 0) { const next = current - 1; turnTo(next); } }
+      if(dx < 0){
+        // Swipe left: same as right arrow/click
+        card.click();
+      } else if(dx > 0){
+        // Swipe right: same as left arrow
+        const leftArrowEvent = new KeyboardEvent('keydown', {key: 'ArrowLeft'});
+        keyHandler(leftArrowEvent);
+      }
     }
     touchStartX = null;
   });
 
-  // ensure stage reserves space matching book to avoid layout jumps
-  requestAnimationFrame(()=>{
-    const bh = book.getBoundingClientRect().height;
-    stageContent.style.minHeight = Math.max(bh * 0.9, stageContent.clientHeight) + 'px';
-  });
+
 }
 
 // Cancel or reset evade animations on resize or when leaving landing
@@ -660,14 +740,6 @@ primaryStage.addEventListener('transitionend', ()=>{
   cancelNoEvadeAnim();
   noBtn.style.setProperty('--tx', '0px');
   noBtn.style.setProperty('--ty', '0px');
-});
-
-// Small accessibility: keyboard support for book when open
-document.addEventListener('keydown', (e)=>{
-  const b = document.querySelector('.book.open');
-  if(!b) return;
-  if(e.key === 'ArrowRight') b.querySelector('.hit-right')?.click();
-  if(e.key === 'ArrowLeft') b.querySelector('.hit-left')?.click();
 });
 
 // Initialize appearance values
