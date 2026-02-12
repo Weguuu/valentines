@@ -11,12 +11,12 @@ let noCount = 0;
 const maxNo = 5;
 
 const responses = [
-  "Oh my! You said yes right away — my heart is full. 💖",
-  "You chose yes after one little protest — perfect! 🌸",
-  "After a couple of stubborn No's, you still said yes — I adore you. 🌷",
-  "You kept teasing and then said yes — what a journey! 🌟",
-  "You resisted four times, then yielded — that makes it extra special. 🎁",
-  "You held out until the fifth — worth every playful moment. 🥂"
+  "YAYYYYYY",
+  "No? The audacity! HMP MWA",
+  "You said no twice, but it's okay I still love you.",
+  "THREE TIMES? >:(( you said yes parin kaya :DD",
+  "Four times... alam mo okay lang, nag yes ka parin fucking faggot of mine for life",
+  "Akala mo makakapag-no ka parin no? Sadly, you can't. Because you mine you thot MWA >:P"
 ];
 
 function updateNoButtonAppearance(){
