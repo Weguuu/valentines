@@ -517,6 +517,18 @@ function showBook(){
       back: '<p>A day I remember like it was yesterday,<br>A simple time, of a near and brief perfect day.<br><br>In MindZone’s hum, amidst thesis and pen,<br>We walked the hallways, just quietly then.<br><br>I asked, “Do you want this?” he said, “Yes, I do,”<br>“So we’re partners now?” “Yes,” came true.<br><br>No grand display, no staged delight,<br>Just two hearts folding in the softest light.<br><br>Unexpectedly anticlimactic, yet perfectly ours,<br>A beginning whispered, no need for towers.</p>'
     },
     {
+      front: '<h2>Chapter 17: The First Two Hurdles</h2>',
+      back: '<p>Two months in, the hardest stretch,<br> where I’ve always been left in the fetch.<br> But this time he stayed,<br> and the days flowed soft, unafraid.<br><br>Moana played on the cinema screen,<br> popcorn between us, a quiet scene.<br> Tickets pressed flat, small tokens kept,<br> memories settled while the world slept.<br><br>We strolled the mall, hands warmed by cup,<br> laughter spilled as the cats came up.<br> The city behind, Bataan ahead,<br> a new horizon, where our hearts led.<br><br>The road was wide, the air felt new,<br> yet all I wanted was simply him too.</p>'
+    },
+    {
+      front: '<h2>Chapter 18: The Centaur and the Metal Snake</h2>',
+      back: '<p>December rolled with a mischievous grin,<br> Centaur above, metal snake within.<br> “Just bros,” we said, conspiratorial lies,<br> while Tagaytay’s winds unspooled the skies.<br><br>Sky Ranch spun, my stomach in revolt,<br> he laughed, untamed, and caught my jolt.<br> The rides screamed, yet his hand in mine,<br> made dizzying heights feel like a line.<br><br>Bag of Beans later, warm dim light,<br> his eyes glimmered, a quiet, fierce delight.<br> Cake between us, frosting on his cheek,<br> his laughter carved a language words could not speak.</p>'
+    },
+    {
+      front: '<h2>Chapter 19: New Year, New Birthday</h2>',
+      back: '<p>The year turned over, quiet, unclaimed,<br> yet he was there, and nothing felt the same.<br> Two months of presence, unbroken, close,<br> a warmth that wrapped, a hand that knows.<br><br>Eight days past, my birthday arrived,<br> friends around, but he kept me alive.<br> Games played, drinks poured, laughter wide,<br> my heart pressed in his orbit, nowhere to hide.<br><br>Genshin luck, Mavuika in hand,<br> small victories scattered like stars on sand.<br> And I felt it: love, patient and true,<br> folding me softly, whispered, “with you.”</p>'
+    },
+    {
       front: '<h2>Chapter 20: Whispers of Valentine</h2>',
       back: '<p>Our first Valentine arrived without spectacle,<br> no orchestras, no rehearsed miracles —<br> just you and I learning how love eats.<br>Smoke curled upward from the samgyupsal grill,<br> and time slowed between the turning of meat.<br> You discovered the tofu —<br> held it like a fragile revelation,<br> eyes bright over something so simple.<br><br>We cooked too much, as if hunger could measure devotion,<br> and forced laughter between bites,<br> determined not to be fined for loving excessively.<br> Bloated, breathless, ridiculous —<br> yet I swear my heart made room for more of you.<br><br>Later, at Odd Café,<br> we spoke in the fluent silence only lovers understand.<br> The skyline hid behind Salcedo’s towering ribs,<br> but even obstructed, the view felt endless —<br> because you were there.<br><br>That night whispered nothing grand,<br> yet everything within me answered:<br><br>If this is ordinary love,<br> let it be mine forever.</p>'
     },
